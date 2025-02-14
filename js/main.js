@@ -74,7 +74,7 @@ while (continuar === true) {
             console.log("Subtotal: $"+sumarSubtotal(carrito))
             let finalizar = true
             if (finalizar === true){
-                let metodoPago = parseInt(prompt("Ingrese el número del medio de pago que desee usar: \n 1-Tarjeta de crédito (10% de recargo) \n 2-Tarjeta de débito \n 3-Efectivo o transferencia (10% de descuento \n 4-Cancelar compra"))
+                let metodoPago = parseInt(prompt("Ingrese el número del medio de pago que desee usar: \n 1-Tarjeta de crédito (10% de recargo) \n 2-Tarjeta de débito \n 3-Efectivo o transferencia (10% de descuento) \n 4-Cancelar compra"))
                 switch (metodoPago){
                     case 1:
                         console.log("Medio de pago: Tarjeta de crédito")
