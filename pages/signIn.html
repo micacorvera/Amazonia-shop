@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Alata&family=Kaushan+Script&family=Rubik+Mono+One&display=swap');
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="../js/main.js"></script>
+    <link rel="stylesheet" href="../Styles/style.css">
+    <link rel="stylesheet" href="../estilos.scss">
+    <title>Açaí amazônia</title>
+</head>
+<body>
+    <header class="cabeza">
+        <nav>
+            <div class="searchBar">
+                <h1><a href="../Index.html">Açaí amazônia</a></h1>
+                <button id="abrir" class="abrirMenu"><img src="./img/menu.png"></button>
+                <ul id="menu">
+                    <button id="cerrar" class="cerrarMenu"><img src="./img/close-button.png"></button>
+                    <li><a href="../Index.html">Inicio</a></li>
+                    <li><a href="./productos.html">Productos</a></li>
+                    <li><a href="./how_to_buy.html">Cómo comprar</a></li>
+                    <li><a href="./contacto.html">Contacto</a></li>
+                </ul>
+                <h3 id="userName"></h3>
+                <div class="botones">
+                    <button id="user" class="icon"><img src="../img/usuario.png">
+                        <ul id="accion" class="acciones">
+                            <li><a href="../pages/signIn.html">Registrarse</a></li>
+                            <li><a href="" id="cerrarSesion">Cerrar sesión</a></li>
+                        </ul>
+                </button>
+                <button id="cartIcon" class="icon"><img src="../img/carrito.png">
+                    <ul id="carrito">
+                        <div >
+                            <table id="datosProducto">
+                                <thead>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio x unidad</th>
+                                        <th>Precio</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <th>
+                                        <h3 >Subtotal:</h3>
+                                        <p id="subtotal">$</p>
+                                    </th>
+                                    <th>
+                                        <h3>Total:</h3>
+                                        <p id="precioTotal">$</p>
+                                        
+                                    </th>
+                                </tr>
+                            </tbody>
+                            </table>
+                            <a href="./productos.html">Continuar compra</a>
+                            <a id="emptyCart">vaciar carrito</a>
+                        </div>
+                    </ul>
+                </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="cuenta">
+            <h2>Creá tu cuenta</h2>
+        <div class="formulario">
+            <div>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre">
+            </div>
+            <div>
+                <label for="E-mail">E-mail</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div>
+                <label for="Telefono" placeholder="Número de teléfono">Número de teléfono</label>
+                <input type="number" name="telefono" id="telefono">
+            </div> 
+            <div>
+                <label for="Contrasenia">Contraseña</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <div>
+                <label for="Contrasenia">Confirmar contraseña</label>
+                <input type="password" name="password2" id="password2">
+            </div>
+            <h2 id="noCoincidence">Las contraseñas no coinciden!</h2>
+            <div>
+                <button id="crearCuenta">Crear cuenta</button>
+            </div>
+            <h2 id="bienvenida"></h2>
+        </div>
+        </section>
+    </main>
+</body>
+</html>

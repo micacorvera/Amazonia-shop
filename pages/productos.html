@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Alata&family=Kaushan+Script&family=Rubik+Mono+One&display=swap');
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="../js/main.js"></script>
+    <link rel="stylesheet" href="../Styles/style.css">
+    <link rel="stylesheet" href="../estilos.scss">
+    <title>Açaí amazônia</title>
+</head>
+<body>
+    <header class="cabeza">
+        <nav>
+            <div class="searchBar">
+                <h1><a href="../Index.html">Açaí amazônia</a></h1>
+                <button id="abrir" class="abrirMenu"><img src="../img/menu.png"></button>
+                <ul id="menu">
+                    <button id="cerrar" class="cerrarMenu"><img src="../img/close-button.png"></button>
+                    <li><a href="../Index.html">Inicio</a></li>
+                    <li><a href="./productos.html">Productos</a></li>
+                    <li><a href="./how_to_buy.html">Cómo comprar</a></li>
+                    <li><a href="./contacto.html">Contacto</a></li>
+                </ul>
+                    <input type="text" name="buscador" id="buscador" placeholder="Buscar productos">
+                    <h3 id="userName"></h3>
+                <div class="botones">
+                    <button id="user" class="icon"><img src="../img/usuario.png">
+                        <ul id="accion" class="acciones">
+                            <li><a href="../pages/signIn.html">Registrarse</a></li>
+                            <li><a href="">Cerrar sesión</a></li>
+                        </ul>
+                </button>
+                <button id="cartIcon" class="icon"><img src="../img/carrito.png">
+                    <ul id="carrito">
+                        <div >
+                            <table id="datosProducto">
+                                <thead>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio x unidad</th>
+                                        <th>Precio</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <th>
+                                        <h3 >Subtotal:</h3>
+                                        <p id="subtotal">$</p>
+                                    </th>
+                                    <th>
+                                        <h3>Total:</h3>
+                                        <p id="precioTotal">$</p>
+                                        
+                                    </th>
+                                </tr>
+                            </tbody>
+                            </table>
+                            <a href="./productos.html">Continuar compra</a>
+                            <a id="emptyCart">vaciar carrito</a>
+                        </div>
+                    </ul>
+                </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h3 id="noResults">No se encontraron resultados :(</h3>
+        <section class="gridProductos">
+            <div id="productos"></div>
+        </section>
+        <!-- <section id="carrito">
+            <h2>Carrito de compras</h2>
+            <div id="datosProducto"></div>
+            <div class="subtotales">
+                <h3 >Subtotal:</h3>
+                <p id="subtotal">$</p>
+                <h3>Total:</h3>
+                <p id="precioTotal">$</p>
+                <a href="">Continuar compra</a>
+                <a href="./productos.html">Ver mas productos</a>
+                <button id="emptyCart">Vaciar carrito</button>
+            </div> -->
+
+        <!--  </section> -->
+    </main>
+</body>
+</html>

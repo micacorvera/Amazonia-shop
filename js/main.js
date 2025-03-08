@@ -1,114 +1,239 @@
-alert("Bienvenido a la tienda")
-console.log("Productos")
 //datos de los productos
-const productos = []
-productos.push(producto1 = {
-    tipo: "Açaí dulce",
-    precio: 10000,
-    cantidad: 1000
-});
-productos.push(producto2 = {
-    tipo: "Açaí (sin endulzar)",
-    precio: 10000,
-    cantidad: 1000
-});
-productos.push(producto3 = {
-    tipo: "Frutos Rojos",
-    precio: 6000,
-    cantidad: 500
-});
-function mostrarProductos (lista){
-    for (const producto of lista){
-    console.log(producto.tipo+"- Precio: $"+producto.precio+" - Cantidad: "+producto.cantidad+"gr");
+const productos = [
+    {
+        id: 1,
+        tipo: "açaí dulce",
+        precio: 10000,
+        cantidad: 1000,
+        imagen: "../img/acaipuro.jpg"
+    },
+    {
+        id: 2,
+        tipo: "açaí puro",
+        precio: 10000,
+        cantidad: 1000,
+        imagen:"../img/acaipuro.jpg"
+    },
+    {
+        id: 3,
+        tipo: "frutos rojos",
+        precio: 6000,
+        cantidad: 500,
+        imagen:'../img/frutosRojos.jpg'
+    },
+    {
+        id: 4,
+        tipo:"pulpa de guayaba",
+        precio: 8000,
+        cantidad: 1000,
+        imagen:'../img/guayaba.webp'
+    },
+    {
+        id: 5,
+        tipo:"pulpa de maracuyá",
+        precio: 9000,
+        cantidad: 1000,
+        imagen:'../img/maracuya.jpg'
+    },
+    {
+        id: 6,
+        tipo: "mango congelado",
+        precio: 9000,
+        cantidad: 1000,
+        imagen:'../img/mango.jpg'
+    }
+]
+//variables
+const addToCart = document.getElementById("boton")
+const datos = document.querySelector("#datosProducto tbody")
+const vaciarCarrito = document.getElementById("emptyCart")
+const card = document.querySelector("card")
+const fila = document.getElementById("itemDatos")
+let carrito = []
+
+//almacenamiento de usuario
+const nombre = document.getElementById("nombre")
+const email = document.getElementById("email")
+const numero = document.getElementById("telefono")
+const contrasenia = document.getElementById("password")
+const contraseniaVerf = document.getElementById("password2")
+const signIn = document.getElementById("crearCuenta")
+const noCoincidence = document.getElementById("noCoincidence")
+const cerrarSesion = document.getElementById("cerrarSesion")
+
+const guardarUsuario = () =>{
+    if (contrasenia.value === contraseniaVerf.value){
+        function usuario (nombre, numero, email){
+            this.name = nombre.value;
+            this.number = numero.value;
+            this.mail= email.value 
+            }
+            noCoincidence.style.display = "none";
+            let user = new usuario(nombre, numero, email)
+            localStorage.setItem("usuario", JSON.stringify(user))
+            let bienvenida = document.querySelector("#bienvenida")
+            bienvenida.innerText=`¡Te damos la bienvenida, 
+                                ${user.name}!`;
+    }else if (contrasenia.value != contraseniaVerf.value){
+        noCoincidence.style.display = "block";
     }
 }
-mostrarProductos(productos)
+signIn.addEventListener("click", guardarUsuario);
+
+
+const headName = JSON.parse(localStorage.getItem("usuario"));
+let userName = document.querySelector("#userName")
+userName.innerText=`${headName.name}`;
+
+/*---buscador y página de producto----*/
+const products = document.getElementById("productos") 
+const noResults = document.getElementById("noResults")
+const mostrarProductos = (lista) =>{
+    products.innerHTML="";
+    if (lista.length === 0){
+        noResults.style.display = "block";
+    } else {
+        lista.forEach((producto) => {
+            let card = document.createElement("div")
+            card.className = "card"
+            card.id = `${producto.id}`
+            card.innerHTML = `<img src="${producto.imagen}">
+                            <h3>${producto.tipo} x ${producto.cantidad}gr</h3>
+                            <h4>$${producto.precio}</h4>
+                            <h5>${producto.cantidad}gr.</h5>
+                            <a class="agregar-carrito" id="boton" >Agregar al carrito</a>`
+        products.appendChild(card)
+    })
+    noResults.style.display = "none";
+    }
+}
+mostrarProductos(productos) ;
+
+const input = document.getElementById("buscador")
+const busqueda = () => {
+    const searchTerm = input.value.toLowerCase();
+    const filtrados = productos.filter((producto) =>
+        producto.tipo.toLowerCase().startsWith(searchTerm));
+    mostrarProductos(filtrados)
+}
+input.addEventListener("input", busqueda)
+
 
 //carrito
-function agregarAlcarrito(item){
-    carrito.push(item)
-    console.log((item.tipo)+" - Precio: $"+(item.precio)+" - Cantidad: "+(item.cantidad)+"gr")
+
+
+
+//eventListeners
+cargarEventListeners();
+function cargarEventListeners(){
+
+    products.addEventListener("click", agregarAlcarrito);
+
+    //eliminar producto
+    datos.addEventListener("click", eliminarProducto)
+
+    document.addEventListener('DOMContentLoaded', () => {
+        carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carritoHTML()
+    })
+    //vaciar carrito
+    vaciarCarrito.addEventListener("click", () =>{
+        carrito = []; 
+        limpiarHTML();
+        sincronizarStorage()
+    })
+    cerrarSesion.addEventListener("click", vaciarStorage)
 }
-const carrito = []
-let sumarSubtotal = function (carrito){
-    let subtotal = 0;
-    for (let elemento of carrito){
-        subtotal += elemento.precio
-    }
-    return subtotal
+
+function vaciarStorage(){
+    localStorage.clear();
 }
-console.log("\n Productos seleccionados \n")
-let continuar = true
-while (continuar === true) {
-    let menu = parseInt(prompt("Ingrese el número de la operación que desea realizar: \n 1-Agregar açaí dulce \n 2-Agregar açaí sin endulzar \n 3-Agregar frutos rojos \n 4-Ver subtotal \n 5-Eliminar último producto \n 6-Finalizar compra"))
-    // función con parámetro
-    function recargo(total, porcentajeRecargo) {
-        return total + (total * porcentajeRecargo / 100);
+function agregarAlcarrito(e){
+    if(e.target.classList.contains("agregar-carrito")){
+        const productoSeleccionado = e.target.parentElement;
+        leerDatosProducto(productoSeleccionado)
     }
-    function descuento(total, porcentajeDescuento) {
-        return total - (total * porcentajeDescuento / 100)
-    }
-    switch (menu){
-        case 1:
-            agregarAlcarrito(productos[0])
-            break
-        case 2:
-            agregarAlcarrito(productos[1]) 
-            break
-        case 3:
-            agregarAlcarrito(productos[2])
-            break
-        case 4:
-            console.log("Subtotal: $"+sumarSubtotal(carrito))
-            break
-        case 5:
-            let productoEliminado = carrito.pop();
-            console.log(" \n Producto eliminado: "+productoEliminado.tipo+"\n");
-            mostrarProductos(carrito)
-            console.log("Subtotal: $"+sumarSubtotal(carrito));
-            break
-        case 6:
-            console.clear()
-            console.log("Productos seleccionados")
-            mostrarProductos(carrito) 
-            console.log("Subtotal: $"+sumarSubtotal(carrito))
-            let finalizar = true
-            if (finalizar === true){
-                let metodoPago = parseInt(prompt("Ingrese el número del medio de pago que desee usar: \n 1-Tarjeta de crédito (10% de recargo) \n 2-Tarjeta de débito \n 3-Efectivo o transferencia (10% de descuento) \n 4-Cancelar compra"))
-                switch (metodoPago){
-                    case 1:
-                        console.log("Medio de pago: Tarjeta de crédito")
-                        console.log("Total a pagar: $"+recargo(sumarSubtotal(carrito), 10))
-                        alert("Gracias por su compra")
-                        break
-                    case 2:
-                        console.log("Medio de pago: Tarjeta de débito")
-                        console.log("Total a pagar: $"+sumarSubtotal(carrito))
-                        alert("Gracias por su compra")
-                        break
-                    case 3:
-                        console.log("Medio de pago: Efectivo / transferencia")
-                        console.log("Total a pagar: $"+descuento(sumarSubtotal(carrito), 10))
-                        alert("Gracias por su compra")
-                        break
-                    case 4:
-                        console.log("Compra cancelada")
-                        alert("Hasta la próxima 👋😊")
-                        break
-                    default:
-                        alert("Ingrese un número del 1 al 3")
-                        break
-                    }
-                    if (metodoPago == 1 || metodoPago == 2 || metodoPago == 3 || metodoPago == 4){
-                        finalizar = false
-                    }
+}
+
+function eliminarProducto(e) {
+    if (e.target.classList.contains("borrar")){
+        const productId = e.target.getAttribute('id');
+        const existe = carrito.some(product => ( product.id === productId && product.amount > 1));
+        if(existe){
+            const producto = carrito.map(product => {
+                if(product.id === productId){
+                    product.amount--;
                 }
-        break
-        default:
-            alert("ingrese un número del 1 al 5")
-        break
+                    return product
+            });
+            carrito = [...producto]
+        }else{
+            carrito = carrito.filter(producto => producto.id !== productId);
+        }     
+        
+        /* console.log(carrito) */
+        carritoHTML();
     }
-    if (menu === 6){ 
-        continuar = false
-    }   
+    
 }
+
+function leerDatosProducto(product){
+    let infoProduct = { 
+        type : product.querySelector('h3').textContent,
+        price : product.querySelector('h4').textContent,
+        cant : product.querySelector('h5').textContent,
+        img: product.querySelector('img').src,
+        id: product.id,
+        amount: 1
+    }
+    const existe = carrito.some(product => product.id === infoProduct.id);
+    if(existe){
+        const producto = carrito.map(product => {
+            if(product.id === infoProduct.id){
+                product.amount++;
+                return product
+            }else{
+                return product
+            }
+        });
+        carrito = [...producto]
+    }else{
+        carrito.push(infoProduct)
+    }     
+    console.log(existe)
+    console.log(carrito);
+    carritoHTML();
+}
+function carritoHTML(){
+
+    limpiarHTML();
+    carrito.forEach((item) => {
+        const {type, price, amount, img, id} = item;
+        let fila = document.createElement("tr");
+        fila.id = "itemDatos";
+        fila.innerHTML = `
+        <th><div id="imgProducto"><img src="${img}"></div></th>
+        <th><h3 id="tipoProducto">${type}</h3></th>
+        <th><h3 id="cantProducto">${amount}</h3></th>
+        <th><h4 id="precioUnidad">${price}</h4></th>
+        <th><h4 id="precioCant">${price}</h4></th>
+        <th><button class="borrar"><img id="${id}" class="borrar" src="../img/borrar.png"></button></th>
+        `;
+        datos.appendChild(fila)
+    })
+
+    //agregar carrito al storage
+    sincronizarStorage();
+
+}
+
+function sincronizarStorage(){
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+}
+
+function limpiarHTML(){
+    while(datos.firstChild){
+        datos.removeChild(datos.firstChild);
+    }
+}
+
