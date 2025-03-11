@@ -183,7 +183,7 @@ function carritoHTML(){
         <th><h3 id="tipoProducto">${type}</h3></th>
         <th><h3 id="cantProducto">${amount}</h3></th>
         <th><h4 id="precioUnidad">${price}</h4></th>
-        <th><h4 id="precioCant">${price}</h4></th>
+        <th><h4 id="precioCant">${price*amount}</h4></th>
         <th><button class="borrar"><img id="${id}" class="borrar" src="../img/borrar.png"></button></th>
         `;
         datos.appendChild(fila)

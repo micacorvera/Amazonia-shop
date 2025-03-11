@@ -73,7 +73,7 @@
     <main>
         <section class="cuenta">
             <h2>Creá tu cuenta</h2>
-        <div class="formulario">
+        <div class="form" id="form">
             <div>
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre">
@@ -94,9 +94,9 @@
                 <label for="Contrasenia">Confirmar contraseña</label>
                 <input type="password" name="password2" id="password2">
             </div>
-            <h2 id="noCoincidence">Las contraseñas no coinciden!</h2>
+            <h2 id="warnings" class="warnings"></h2>
             <div>
-                <button id="crearCuenta">Crear cuenta</button>
+                <button type="submit" id="crearCuenta">Crear cuenta</button>
             </div>
             <h2 id="bienvenida"></h2>
         </div>
