@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="../js/main.js"></script>
     <link rel="stylesheet" href="../Styles/style.css">
-    <link rel="stylesheet" href="../estilos.scss">
     <title>Açaí amazônia</title>
 </head>
 <body>
@@ -16,9 +15,7 @@
         <nav>
             <div class="searchBar">
                 <h1><a href="../Index.html">Açaí amazônia</a></h1>
-                <button id="abrir" class="abrirMenu"><img src="./img/menu.png"></button>
                 <ul id="menu">
-                    <button id="cerrar" class="cerrarMenu"><img src="./img/close-button.png"></button>
                     <li><a href="../Index.html">Inicio</a></li>
                     <li><a href="./productos.html">Productos</a></li>
                     <li><a href="./how_to_buy.html">Cómo comprar</a></li>
@@ -60,7 +57,7 @@
                                 </tr>
                             </tbody>
                             </table>
-                            <a href="./productos.html">Continuar compra</a>
+                            <a href="./checkout.html">Continuar compra</a>
                             <a id="emptyCart">vaciar carrito</a>
                         </div>
                     </ul>
@@ -70,7 +67,40 @@
         </nav>
     </header>
     <main>
-        <h2>Cómo comprar</h2>
+        <h2 class="titulo">Cómo comprar</h2>
+        <section class="parrafo">
+            <p>1. Elegí el producto que desees comprar </p>
+            <p>2. Hacé clic en el botón de "Agregar al carrito". Esto agregará el producto a tu carrito y te llevará al mismo.</p>   
+            <p>3. Podés seguir agregando otros productos al carrito o sino hacé clic en "Iniciar Compra".</p>    
+        </section>
+        
     </main>
+    <footer id="pie">
+        <div class="redes">
+            <h2>Vias de contacto</h2>
+            <div>
+                <a href="" target="_blank"><img src="../img/instagramLogo.png" alt="Logo Instagram"> @acai_amazônia</a>
+                <a href=""target="_blank"><img src="../img/whatsapp.png" alt="Logo WhatsApp"> 11 2223 3344</a>
+                <a href="" target="_blank"><img src="../img/email.png"alt="Logo G-Mail">amazonia@acai.com</a>
+            </div>
+        </div>
+        <div class="formulario">
+            <h1>Crea tu cuenta</h1>
+                <form action="" method="" enctype="">
+                    <div>
+                        <label for="nombre">nombre</label>
+                        <input type="text" name="nombre" id="nombre">
+                    </div>
+                    <div>
+                        <label for="e-mail">Apellido</label>
+                        <input type="text" name="E-mail" id="email">
+                    </div>
+                    <div>
+                        <input type="submit" value="Enviar formulario">
+                        <input type="reset" value="Limpiar formulario">
+                    </div>
+        </div>
+        </form>
+    </footer>
 </body>
 </html>

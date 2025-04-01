@@ -1,64 +1,21 @@
-//datos de los productos
-const productos = [
-    {
-        id: 1,
-        tipo: "açaí dulce",
-        precio: 10000,
-        cantidad: 1000,
-        imagen: "../img/acaipuro.jpg"
-    },
-    {
-        id: 2,
-        tipo: "açaí puro",
-        precio: 10000,
-        cantidad: 1000,
-        imagen:"../img/acaipuro.jpg"
-    },
-    {
-        id: 3,
-        tipo: "frutos rojos",
-        precio: 6000,
-        cantidad: 500,
-        imagen:'../img/frutosRojos.jpg'
-    },
-    {
-        id: 4,
-        tipo:"pulpa de guayaba",
-        precio: 8000,
-        cantidad: 1000,
-        imagen:'../img/guayaba.webp'
-    },
-    {
-        id: 5,
-        tipo:"pulpa de maracuyá",
-        precio: 9000,
-        cantidad: 1000,
-        imagen:'../img/maracuya.jpg'
-    },
-    {
-        id: 6,
-        tipo: "mango congelado",
-        precio: 9000,
-        cantidad: 1000,
-        imagen:'../img/mango.jpg'
-    }
-]
+
 //variables
 const addToCart = document.getElementById("boton")
 const datos = document.querySelector("#datosProducto tbody")
 const vaciarCarrito = document.getElementById("emptyCart")
-const card = document.querySelector("card")
 const fila = document.getElementById("itemDatos")
+const botonCarrito = document.getElementById("cartIcon")
+const carritoFloat = document.getElementById("carrito")
 let carrito = []
-
-
-const headName = JSON.parse(localStorage.getItem("usuario"));
-let userName = document.querySelector("#userName")
-userName.innerText=`${headName.name}`;
-
-/*---buscador y página de producto----*/
 const products = document.getElementById("productos") 
+const botonPagar = document.getElementById("finalizarCompra")
 const noResults = document.getElementById("noResults")
+const iniciarCompra = document.querySelector("#cont-compra")
+let aumentar = document.getElementById("aumentar");
+let contar = document.getElementById("counter");
+let restar = document.getElementById("restar")
+let contador = 0;
+
 const mostrarProductos = (lista) =>{
     products.innerHTML="";
     if (lista.length === 0){
@@ -77,17 +34,24 @@ const mostrarProductos = (lista) =>{
     })
     noResults.style.display = "none";
     }
-}
-mostrarProductos(productos) ;
+} 
 
-const input = document.getElementById("buscador")
+fetch("../db/data.json")
+    .then(response => response.json())
+    .then(data => mostrarProductos(data))
+
+
+/*---buscador y página de producto----*/
+
+
+/* const input = document.getElementById("buscador")
 const busqueda = () => {
     const searchTerm = input.value.toLowerCase();
     const filtrados = productos.filter((producto) =>
         producto.tipo.toLowerCase().startsWith(searchTerm));
     mostrarProductos(filtrados)
 }
-input.addEventListener("input", busqueda)
+input.addEventListener("input", busqueda) */
 
 
 //carrito
@@ -97,22 +61,37 @@ input.addEventListener("input", busqueda)
 //eventListeners
 cargarEventListeners();
 function cargarEventListeners(){
+    let cantClicks = 0
+    botonCarrito.addEventListener("click", ()=> {
+        cantClicks++;
+        if (cantClicks%2 != 0){
+            carritoFloat.style.display="block"
+        } else if (cantClicks%2 == 0){
+            carritoFloat.style.display = "none"
+        }
+    })
+    carritoFloat.addEventListener("click", ()=>{
+        carritoFloat.style.display ="block"
+    })
 
     products.addEventListener("click", agregarAlcarrito);
 
     //eliminar producto
     datos.addEventListener("click", eliminarProducto)
 
-    document.addEventListener('DOMContentLoaded', () => {
-        carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        carritoHTML()
-    })
+    carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carritoHTML()
     //vaciar carrito
     vaciarCarrito.addEventListener("click", () =>{
         carrito = []; 
         limpiarHTML();
         sincronizarStorage()
     })
+
+    
+    // boton de cantidad de productos
+
+    //sweet alert
 }
 
 
@@ -144,6 +123,7 @@ function eliminarProducto(e) {
     
 }
 
+
 function leerDatosProducto(product){
     let infoProduct = { 
         type : product.querySelector('h3').textContent,
@@ -151,8 +131,8 @@ function leerDatosProducto(product){
         cant : product.querySelector('h5').textContent,
         img: product.querySelector('img').src,
         id: product.id,
-        amount: 1
-    }
+        amount: 1 
+    } 
     const existe = carrito.some(product => product.id === infoProduct.id);
     if(existe){
         const producto = carrito.map(product => {
@@ -167,32 +147,59 @@ function leerDatosProducto(product){
     }else{
         carrito.push(infoProduct)
     }     
-    console.log(existe)
-    console.log(carrito);
     carritoHTML();
 }
+
 function carritoHTML(){
 
     limpiarHTML();
     carrito.forEach((item) => {
-        const {type, price, amount, img, id} = item;
-        let fila = document.createElement("tr");
+        const {type, id, amount, img, price} = item;
+    let fila = document.createElement("tr");
         fila.id = "itemDatos";
         fila.innerHTML = `
         <th><div id="imgProducto"><img src="${img}"></div></th>
         <th><h3 id="tipoProducto">${type}</h3></th>
-        <th><h3 id="cantProducto">${amount}</h3></th>
+        <th><button class="contador" id="aumentar">+</button>
+        <span id="counter">${amount}</span>
+        <button class="contador" id="restar">-</button></th>
         <th><h4 id="precioUnidad">${price}</h4></th>
         <th><h4 id="precioCant">${price*amount}</h4></th>
         <th><button class="borrar"><img id="${id}" class="borrar" src="../img/borrar.png"></button></th>
         `;
-        datos.appendChild(fila)
-    })
-
+        datos.appendChild(fila);
     //agregar carrito al storage
     sincronizarStorage();
+})};
 
+
+
+
+
+
+function imprimirCarrito(array){
+    array.forEach((producto) =>{
+        let infoCompra = document.createElement('div');
+        infoCompra.className = "infoCompra";
+        infoCompra.innerHTML = `
+        <th><div id="imgProducto"><img src="${producto.img}"></div></th>
+        <th><h3 id="tipoProducto">${producto.tipo}</h3></th>
+        <th><h4 id="precioCant">${producto.amount}</h4></th>
+        `
+        compra.appendChild(infoCompra);
+    })
 }
+imprimirCarrito(carrito)
+
+aumentar.onclick = ()=>{
+    contador++;
+    contar.innerHTML = contador
+}
+restar.onclick = () =>{
+    contador--;
+    contar.innerHTML = contador
+}
+
 
 function sincronizarStorage(){
     localStorage.setItem('carrito', JSON.stringify(carrito))
@@ -204,3 +211,7 @@ function limpiarHTML(){
     }
 }
 
+
+// sweet alert
+
+    

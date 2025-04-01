@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "tipo": "açaí dulce",
+        "precio": 10000,
+        "cantidad": 1000,
+        "imagen": "../img/acaipuro.jpg"
+    },
+    {
+        "id": 2,
+        "tipo": "açaí puro",
+        "precio": 10000,
+        "cantidad": 1000,
+        "imagen":"../img/acaipuro.jpg"
+    },
+    {
+        "id": 3,
+        "tipo": "frutos rojos",
+        "precio": 6000,
+        "cantidad": 500,
+        "imagen":"../img/frutosRojos.jpg"
+    },
+    {
+        "id": 4,
+        "tipo":"pulpa de guayaba",
+        "precio": 8000,
+        "cantidad": 1000,
+        "imagen":"../img/guayaba.webp"
+    },
+    {
+        "id": 5,
+        "tipo":"pulpa de maracuyá",
+        "precio": 9000,
+        "cantidad": 1000,
+        "imagen":"../img/maracuya.jpg"
+    },
+    {
+        "id": 6,
+        "tipo": "mango congelado",
+        "precio": 9000,
+        "cantidad": 1000,
+        "imagen":"../img/mango.jpg"
+    }
+]

@@ -142,6 +142,7 @@ h1{
     grid-area: carousel;}
     .carousel-caption h5{
         background-color: #8b288b85;
+        border-radius: 10px;
         opacity: 1;
         height: min-content;
         font-family: alata;
@@ -211,11 +212,15 @@ h1{
     
     
 /*---categorias---*/
+.categorias{
+    background-color: #8b288b;
+}
 .categorias h2{
-    margin-top: 40px;
+    padding-top: 40px;
     font-family: alata;
     font-size: 50px;
     margin-left: 20px;
+    color: white;
 }
 .gridCategorias{
     text-align: center;
@@ -227,43 +232,174 @@ h1{
     grid-area: categorias;
 }
 .gridCategorias div{
-    font-family:akiraexpanded;
-    width: auto;
+    font-family:alata;
+    width: 325px;
     height: 325px;
-    border: 3px solid rgb(180, 180, 180);
     margin-inline: 30px;
     margin-top: 50px;
     border-radius: 5px;
-    padding-inline: 30px;
     transition: box-shadow 1s;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+    margin-bottom: 50px;
 }
 .gridCategorias div img{
-    width: 299px;
-    height: 320px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    
 }
 .gridCategorias div:hover{
-    box-shadow: 1px 2px 14px 2px gray;
+    box-shadow: 1px 2px 14px 2px rgb(139, 62, 120);
 }
 .gridCategorias div a{
+    background-color: #a77aa78a;
+    border-radius: 5px;
+    position: absolute;
     text-decoration: none;
-    color:rgb(51, 51, 51);
-    font-size: x-large;
-    padding: 5px;
-    padding-top: 1px;
+    color:#500650;
+    font-size: 30px;
     transform: scale(2, 2);
     transition: font-size 1s;
+    padding: 5px 5px;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .categorias div a:hover{
-    font-size: xx-large;
+    font-size: 25px;
 }
 
+/*---info açaí---*/
+
+.info{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    justify-items:center;
+    align-items: stretch;
+    grid-area: datos;
+    font-family: alata;
+    color: #ffffff;
+    background-color: #8b288b;
+}
+.info div{
+    width: 500px;
+    margin-top: 50px;
+    margin-left: 60px;
+}
+#img-acai{
+    width:700px;
+    height: 500px;
+    margin-bottom: 50px;
+}
+#img-acai img{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+#texto{
+    align-content: center;
+}
+#info-titulo{
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+#texto p{
+    font-size: 20px;
+}
+
+/*----info contacto-----*/
+.mas-info{
+    background-color: #8b288b;
+}
+.gridInfo{
+    display: grid;
+    grid-template-rows: 2fr 2fr;
+    font-family: alata;
+    color: white;
+}
+.gridItem{
+    display: flex;
+    justify-content: flex-end;
+}
+.gridBar{
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    justify-self: center;
+    background-color: #b88eb8;
+    border-radius: 8px;
+    width: max-content;
+    height: min-content;
+    padding: 20px 20px;
+}
+#leftItem{
+    border-right: 3px solid white;
+    padding-right: 20px;
+}
+#rightItem{
+    padding-left: 20px;
+}
+.gridItem div{
+    display: block;
+    align-content: center;
+    margin-left: 10px;
+}
+.gridItem img {
+    height: 80px;
+    width: 80px;
+}
+/*-----footer------*/
+#pie{
+    background-color: #500650;
+    font-family: alata;
+    color: white;
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    bottom: 0px;
+}
+.redes h2{
+    font-size: 40px;
+    padding-top: 40px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+.redes div{
+    width: max-content;
+}
+.redes div a{
+    display: block;
+    margin-block: 10px;
+    margin-left: 50px;
+    width: max-content;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+.redes div a img{
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+}
+.formulario{
+    margin-bottom: 100px;
+}
+.formulario h1{
+    margin-top: 30px;
+    color: white;
+}
+.formulario form div input{
+    margin-block: 10px;
+}
 /*----productos-----*/
 .gridProductos{
     margin-top: 150px;
     font-family: 'poppins';
     text-align: center;
     padding-bottom: 5px;
-    
+    margin-bottom: 40px;
 }
 #productos{
     display: grid;
@@ -275,12 +411,11 @@ h1{
     grid-area: productos;
 }
 .card{
-    
     border: 2px solid rgb(255, 255, 255);
     background-color: white;
     border-radius: 5px;
     width: 255px;
-    height:300px;
+    height:350px;
     transition: box-shadow 1s;
     align-content: center;
     font-family: alata;
@@ -317,7 +452,7 @@ h1{
 }
 .card img{
     width: 251px;
-    height: 180px;
+    height: 225px;
     border-radius: 6px;
     justify-content: center;
 }
@@ -396,22 +531,6 @@ h1{
 }
 .purchInfo h3{
     margin-top: 30px;
-}
-/*---info açaí---*/
-.info{
-    display: grid;
-    grid-template-columns: 2fr 2fr;
-    justify-items:center;
-    align-items: stretch;
-    width:auto;
-    grid-area: datos;
-}
-.info div{
-    width: 400px;
-}
-#img-acai{
-    width:50%;
-    height: 50%;
 }
 
 /*----registro-----*/
@@ -504,7 +623,8 @@ h1{
 
 #cartIcon:hover #carrito{
     display: block;
-}
+} 
+
 #datosProducto tr{
     display: flex;
     justify-content: start;
@@ -572,4 +692,303 @@ h1{
 #itemDatos th{
     display: flex;
     margin-inline: 10px;
+}
+
+/*----otras páginas----*/
+.titulo{
+    margin-top: 150px;
+    margin-left: 40px;
+    font-family: alata;
+    font-size: 50px;
+    color: white;
+}
+.parrafo{
+    font-family: alata;
+    color: white;
+    font-size: 20px;
+    display: block;
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-bottom: 300px;
+}
+.parrafo p{
+    margin-block: 10px;
+}
+
+/*-----contacto-----*/
+.contacto{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    font-family: alata;
+    color: white;
+    margin-top: 40px;
+}
+.contacto div ul{
+    margin-left: 300px;
+}
+.contacto div ul li {
+    display: flex;
+    width: 100%;
+}
+.icono{
+    height: min-content;
+    width: min-content;
+}
+.icono img{
+    width: 30px;
+    height: 30px;
+}
+.formulario div{
+    margin-block: 10px;
+}
+.formulario div input{
+    font-size: 25px;
+        display: block;
+        background-color: rgba(255, 255, 255, 0.493);
+        border-radius: 6px;
+        height: 40px;
+        width: 400px;
+}
+#mensaje{
+    background-color: rgba(255, 255, 255, 0.493);
+    border-radius: 6px;
+    width: 400px;
+    margin-bottom: 20x;
+}
+
+
+.cuenta div div h2{
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.mail{
+    display: block;
+    background-color: rgba(255, 255, 255, 0.493);
+    border-radius: 6px;
+    height: 40px;
+    width: 300px;
+}
+.select input{
+    border-radius: 10px;
+    width: min-content;
+    height: 15px;
+    align-self: center;
+    margin-right: 10px;
+}
+.select{
+    color: white;
+    display: flex;
+    margin-block: 10px;
+}
+.select h4{
+    margin-left: 50px;
+}
+/*---Checkout---*/
+#continuar{
+    margin-top: 30px;
+    font-family: alata;
+    font-size: 20px;
+    background-color: #500650;
+    border-radius: 6px;
+    width: auto;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.cuenta div button a{
+    text-decoration: none;
+    color: white;
+}
+.cuenta div{
+    margin-block: 10px;
+}
+
+
+.facturacion div input{
+    font-size: 25px;
+        display: block;
+        background-color: rgba(255, 255, 255, 0.493);
+        border-radius: 6px;
+        height: 40px;
+        width: 400px;
+}
+.facturacion div label{
+    color: white;
+    position: relative;
+}
+.facturacion select{
+    font-size: 25px;
+    color:#290229;
+    font-family: alata;
+        display: block;
+        background-color: rgba(255, 255, 255, 0.493);
+        border-radius: 6px;
+        height: 40px;
+        width: 400px;
+}
+.mediosDePago h2{
+    font-size: 30px;
+}
+.pago{
+    font-family: alata;
+    color: white;
+}
+.info-cliente{
+    margin-top: 150px;
+    margin-left: 70px;
+    width: 500px;
+    border: #b88eb8 solid 3px;
+    border-radius: 8px;
+}
+.info-cliente div{
+    display: flex;
+    margin-left: 20px;
+    margin-block: 20px;
+}
+.info-cliente div h3{
+    align-self: center;
+    margin-left: 10px;
+}
+.info-cliente div img{
+    height: 50px;
+    width: auto;
+}
+.mediosDePago{
+    margin-left: 70px;
+    margin-top: 30px;
+}
+.mediosDePago ul li{
+    list-style: none;
+    font-size: 20px;
+}
+.mediosDePago ul li input{
+    margin-right: 10px;
+}
+.alertas{
+    display: none;
+    font-size: 20px;
+    color: rgb(209, 139, 160);
+    margin-bottom: 10px;
+}
+.alertas-activa{
+    display: block;
+}
+#finalizarCompra{
+    margin-top: 30px;
+    font-family: alata;
+    font-size: 20px;
+    background-color: #500650;
+    border-radius: 6px;
+    width: auto;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 70px;
+    color: white;
+    margin-bottom: 50px;
+}
+#carrito-resumen{
+    width: auto;
+    margin-top: 200px;
+    margin-right: 80px;
+    border: solid 3px #b88eb8; 
+    border-radius: 5px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom: solid #b88eb87e;
+}
+.carrito-info{
+    color: white;
+    font-family: alata;
+}
+#totales{
+    border: solid #b88eb8 3px;
+    margin-right: 80px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-top: thin;
+}
+#totales table tbody {
+    font-size: 18px;
+}
+#totales table tbody tr{
+    display: flex;
+    margin-left: 20px;
+}
+.envio{
+    display: flex;
+    margin-left: 20px;
+}
+.envio td{
+    margin-right: 80px;
+    justify-content: space-around;
+}
+#total{
+    font-size: 25px;
+}
+.resumen-producto{
+    display: flex;
+    padding-inline: 10px;
+    margin-block: 20px;
+}
+.resumen-producto h3{
+    margin-inline: 10px;
+}
+.resumen-producto img{
+    width: auto;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+#subtotal{
+    position: inherit;
+}
+.checkout{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+/*---formulario de pago---*/
+#tarjeta-form{
+    display: none;
+}
+#tarjeta-form input{
+    font-size: 20px;
+    font-family: alata;
+    color: white;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.493);
+    border-radius: 6px;
+    height: 40px;
+    width: 400px;
+    margin-block: 10px;
+    padding-left: 8px;
+}
+#tarjeta-form select{
+    font-size: 20px;
+    font-family: alata;
+    color: rgb(90, 90, 90);
+    display: block;
+    background-color: rgba(255, 255, 255, 0.493);
+    border-radius: 6px;
+    height: 40px;
+    width: 400px;
+    margin-block: 10px;
+}
+#tarjeta-form input [placeholder]{
+    color: rgb(255, 255, 255);
+}
+#row{
+    display: flex;
+}
+#row input{
+    width: 195px;
+}
+
+.swal2-title{
+    font-family: alata;
+    color: #500650;
+}
+.swal2-html-container{
+    font-family: alata;
+    color: #5c045c;
 }

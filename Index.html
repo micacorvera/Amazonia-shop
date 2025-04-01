@@ -7,9 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-escale= 1">
     <script defer src="js/main.js"></script>
+    <script defer src="./js/user.js"></script>
     <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="estilos.scss">
-    <link rel="stylesheet" href="estilos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Açaí amazônia</title>
@@ -63,7 +62,7 @@
                                 </tr>
                             </tbody>
                             </table>
-                            <a href="./productos.html">Continuar compra</a>
+                            <a href="./pages/checkout.html">Continuar compra</a>
                             <a id="emptyCart">vaciar carrito</a>
                         </div>
                     </ul>
@@ -128,68 +127,70 @@
             </div>
             <div id="texto">
                 <h3 id="info-titulo">Un súper alimento</h3>
-                <p id="parrafo">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur laborum dolor adipisci, voluptatum incidunt ducimus tempora quos, laudantium deleniti delectus in cum totam. Officiis quod ipsa vero distinctio, iure nesciunt?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur laborum dolor adipisci, voluptatum incidunt ducimus tempora quos, laudantium deleniti delectus in cum totam. Officiis quod ipsa vero distinctio, iure nesciunt?</p>
             </div>
         </section>
         <section class="mas-info">
             <div class="gridInfo">
                 <div class="gridBar">
-                    <div class="gridItem">
+                    <div class="gridItem" id="leftItem">
                         <img src="./img/envios.png">
-                        <h4 class="tituloMasInfo">Envíos a domicilio</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisici</p>
+                        <div>
+                            <h4 class="tituloMasInfo">Envíos a domicilio</h4>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisici</p>
+                        </div>
                     </div>
-                    <div class="gridItem">
+                    <div class="gridItem" id="rightItem">
                         <img src="./img/ubicacion.png">
-                        <h4 class="tituloMasInfo">Puntos de retiro</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisici</p>
+                        <div>
+                            <h4 class="tituloMasInfo">Puntos de retiro</h4>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisici</p>
+                        </div>
                     </div>
                 </div>
                 <div class="gridBar">
-                    <div class="gridItem">
+                    <div class="gridItem" id="leftItem">
                         <img src="./img/instagramLogo.png">
-                        <h4 class="tituloMasInfo">¡Seguinos en instagram!</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisici</p>
+                        <div>
+                            <h4 class="tituloMasInfo">¡Seguinos en instagram!</h4>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisici</p>
+                        </div>
                     </div>
-                    <div class="gridItem">
+                    <div class="gridItem" id="rightItem">
                         <img src="./img/whatsapp.png">
-                        <h4 class="tituloMasInfo">Nuestro whatsapp</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisici</p>
+                        <div>
+                            <h4 class="tituloMasInfo">Nuestro whatsapp</h4>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisici</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="fixed">
-            <a href=""><img src="./img/whatsapp.png"></a>
-        </div>
-    
     </main>
     <footer id="pie">
         <div class="redes">
-            <h2 class="contacto">Vias de contacto</h2>
+            <h2>Vias de contacto</h2>
             <div>
-                <a href="" target="_blank">
-                <img src="" alt="Logo Instagram"></a>
-                <a href=""
-                    target="_blank"><img src="" alt="Logo WhatsApp"></a>
-                <a href="" target="_blank"><img src=""alt="Logo G-Mail"></a>
+                <a href="" target="_blank"><img src="./img/instagramLogo.png" alt="Logo Instagram"> @acai_amazônia</a>
+                <a href=""target="_blank"><img src="./img/whatsapp.png" alt="Logo WhatsApp"> 11 2223 3344</a>
+                <a href="" target="_blank"><img src="./img/email.png"alt="Logo G-Mail">amazonia@acai.com</a>
             </div>
         </div>
-        <h1 class="cuenta">Crea tu cuenta</h1>
         <div class="formulario">
-            <form action="" method="" enctype="">
-                <div>
-                    <label for="nombre">nombre</label>
-                    <input type="text" name="nombre" id="nombre">
-                </div>
-                <div>
-                    <label for="e-mail">Apellido</label>
-                    <input type="text" name="E-mail" id="email">
-                </div>
-                <div>
+            <h1>Crea tu cuenta</h1>
+                <form action="" method="" enctype="">
+                    <div>
+                        <label for="nombre">nombre</label>
+                        <input type="text" name="nombre" id="nombre">
+                    </div>
+                    <div>
+                        <label for="e-mail">Apellido</label>
+                        <input type="text" name="E-mail" id="email">
+                    </div>
+                    <div>
                         <input type="submit" value="Enviar formulario">
                         <input type="reset" value="Limpiar formulario">
-                </div>
+                    </div>
         </div>
         </form>
     </footer>
