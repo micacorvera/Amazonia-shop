@@ -57,12 +57,24 @@
                         <input id="tarjeta" type="radio" name="tarjeta">
                         Tarjeta de crédito o débito
                         <form id="tarjeta-form">
-                            <input type="text" name="num-tarjeta" maxlength="19" placeholder="Número de tarjeta">
-                            <input type="text" name="nombre-titular" placeholder="Titular de la tarjeta">
+                            <div id="grupo-tarjeta">
+                                <input type="text" name="num-tarjeta" maxlength="16" placeholder="Número de tarjeta">
+                                <h2 class="alertas">Número de tarjeta no valido</h2>
+                            </div>
+                            <div id="grupo-titular">
+                                <input type="text" name="nombre-titular" placeholder="Titular de la tarjeta">
+                                <h2 class="alertas">El nombre no es valido</h2>
+                            </div>
                             <label>Vencimiento de la tarjeta</label>
                             <div id="row">
-                                <input type="month" name="fecha-vencimiento">
-                                <input type="text" name="cod-seguridad" placeholder="CVV" maxlength="3" id="cvv">
+                                <div id="grupo-vencimiento">
+                                    <input type="month" name="fecha-vencimiento">
+                                    <h2 class="alertas">Debe completar este campo</h2>
+                                </div>  
+                                <div id="grupo-cvv">
+                                    <input type="text" name="cod-seguridad" placeholder="CVV" maxlength="3" id="cvv">
+                                    <h2 class="alertas">Codigo no valido</h2>
+                                </div>
                             </div>
                             <label for="select">Cuotas</label>
                             <select name="cuotas">
@@ -78,7 +90,10 @@
                                 <option>Pasaporte</option>
                                 <option>Otro</option>
                             </select>
-                            <input type="text" maxlength="10" placeholder="Nº de documento">
+                            <div id="grupo-dni">
+                                <input name="dni" type="text" maxlength="9" placeholder="Nº de documento">
+                                <h2 class="alertas">Dni no valido</h2>
+                            </div>
                         </form>
                     </li>
                     <li> <input type="radio" id="mp"> Mercado Pago</li>
