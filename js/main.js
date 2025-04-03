@@ -105,56 +105,71 @@ function agregarAlcarrito(e){
 function eliminarProducto(e) {
     if (e.target.classList.contains("borrar")){
         const productId = e.target.getAttribute('id');
-        const existe = carrito.some(product => ( product.id === productId && product.amount > 1));
+        const existe = carrito.some(product => ( product.id === Number(productId) && product.amount > 1));
         if(existe){
             const producto = carrito.map(product => {
-                if(product.id === productId){
+                if(product.id === Number(productId)){
                     product.amount--;
                 }
                     return product
             });
             carrito = [...producto]
         }else{
-            carrito = carrito.filter(producto => producto.id !== productId);
+            carrito = carrito.filter(producto => producto.id !== Number(productId));
         }     
-        
+        console.log(productId)
         carritoHTML();
     }
     
 }
 
 
-function leerDatosProducto(product){
-    let infoProduct = { 
-        type : product.querySelector('h3').textContent,
-        price : product.querySelector('h4').textContent,
-        cant : product.querySelector('h5').textContent,
-        img: product.querySelector('img').src,
-        id: product.id,
-        amount: 1 
-    } 
-    const existe = carrito.some(product => product.id === infoProduct.id);
-    if(existe){
-        const producto = carrito.map(product => {
-            if(product.id === infoProduct.id){
-                product.amount++;
-                return product
-            }else{
-                return product
-            }
-        });
-        carrito = [...producto]
-    }else{
-        carrito.push(infoProduct)
-    }     
-    carritoHTML();
-}
+async function leerDatosProducto(product){
+    try{
+        const productId = Number(product.id);
+        const response = await fetch ('../db/data.JSON')
+        if (!response.ok) {    
+            throw new Error(`Error al obtener datos: ${response.status}`);
+        }
+        const data = await response.json();
+        const productoEncontrado = data.find(data =>data.id === productId)
+        if (productoEncontrado){ 
+            let infoProduct = {
+                id: productoEncontrado.id,
+                type: productoEncontrado.tipo,
+                cant: productoEncontrado.cantidad,
+                img: productoEncontrado.imagen,
+                price: productoEncontrado.precio,
+                amount: 1
+        };
+        console.log(infoProduct)
+        const existe = carrito.some(product => Number(product.id) === infoProduct.id);
+        if(existe){
+            const producto = carrito.map(product => {
+                if(Number(product.id) === infoProduct.id){
+                    product.amount++;
+                    return product
+                }else{
+                    return product
+                }
+            });
+            carrito = [...producto]
+        }else{
+            carrito.push(infoProduct)
+        }    
+        carritoHTML();
+        }}
+        catch(err){
+            console.error("Error fetch")
+        }}
+    
+
 
 function carritoHTML(){
 
     limpiarHTML();
     carrito.forEach((item) => {
-        const {type, id, amount, img, price} = item;
+    const {type, id, amount, img, price} = item;
     let fila = document.createElement("tr");
         fila.id = "itemDatos";
         fila.innerHTML = `
@@ -174,24 +189,7 @@ function carritoHTML(){
 
 
 
-
-
-
-function imprimirCarrito(array){
-    array.forEach((producto) =>{
-        let infoCompra = document.createElement('div');
-        infoCompra.className = "infoCompra";
-        infoCompra.innerHTML = `
-        <th><div id="imgProducto"><img src="${producto.img}"></div></th>
-        <th><h3 id="tipoProducto">${producto.tipo}</h3></th>
-        <th><h4 id="precioCant">${producto.amount}</h4></th>
-        `
-        compra.appendChild(infoCompra);
-    })
-}
-imprimirCarrito(carrito)
-
-aumentar.onclick = ()=>{
+/* aumentar.onclick = ()=>{
     contador++;
     contar.innerHTML = contador
 }
@@ -199,7 +197,7 @@ restar.onclick = () =>{
     contador--;
     contar.innerHTML = contador
 }
-
+ */
 
 function sincronizarStorage(){
     localStorage.setItem('carrito', JSON.stringify(carrito))
@@ -214,4 +212,12 @@ function limpiarHTML(){
 
 // sweet alert
 
-    
+    /* let infoProduct = { 
+    type : product.querySelector('h3').textContent,
+    price : product.querySelector('h4').textContent,
+    cant : product.querySelector('h5').textContent,
+    img: product.querySelector('img').src,
+    id: product.id,
+    amount: 1 
+    }  
+ */

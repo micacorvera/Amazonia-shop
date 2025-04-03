@@ -66,12 +66,13 @@ try{
     datosForm.addEventListener('submit', (e)=>{
         e.preventDefault()
         if ((campos.mail && campos.nombre && campos.apellido && campos.dni) === true){
-            location.href = "./payment.html"
+            location.href = "./payment.html";
         }
     })
 }catch (error){
     console.error("el objeto no se encuentra en esta página")
 }
+
 
 function mostrarResumen(lista){
     lista.forEach((producto)=>{
@@ -146,8 +147,8 @@ inputsCard.forEach((input) => {
  */
     /*  */
     
-    /* const headName = JSON.parse(localStorage.getItem("usuario"));
+/*     const headName = JSON.parse(localStorage.getItem("usuario"));
     let userName = document.querySelector("#userName")
-    userName.innerText=`${headName.name}`; */
-
+    userName.innerText=`${headName.name}`; 
+ */
     
