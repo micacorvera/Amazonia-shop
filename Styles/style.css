@@ -516,7 +516,8 @@ h1{
     width: 30px;
     border-radius: 4px;
 }
-#counter{
+
+.counter{
     margin-left: 10px;
     align-content: center;
 }

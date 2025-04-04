@@ -11,52 +11,55 @@ const products = document.getElementById("productos")
 const botonPagar = document.getElementById("finalizarCompra")
 const noResults = document.getElementById("noResults")
 const iniciarCompra = document.querySelector("#cont-compra")
-let aumentar = document.getElementById("aumentar");
-let contar = document.getElementById("counter");
-let restar = document.getElementById("restar")
+const aumentar = document.querySelector("aumentar");
+const contar = document.querySelector("counter");
+const restar = document.querySelector("restar")
 let contador = 0;
-
-const mostrarProductos = (lista) =>{
-    products.innerHTML="";
-    if (lista.length === 0){
-        noResults.style.display = "block";
-    } else {
-        lista.forEach((producto) => {
-            let card = document.createElement("div")
-            card.className = "card"
-            card.id = `${producto.id}`
-            card.innerHTML = `<img src="${producto.imagen}">
-                            <h3>${producto.tipo} x ${producto.cantidad}gr</h3>
-                            <h4>$${producto.precio}</h4>
-                            <h5>${producto.cantidad}gr.</h5>
-                            <a class="agregar-carrito" id="boton" >Agregar al carrito</a>`
-        products.appendChild(card)
-    })
-    noResults.style.display = "none";
-    }
-} 
-
-fetch("../db/data.json")
-    .then(response => response.json())
-    .then(data => mostrarProductos(data))
-
 
 /*---buscador y página de producto----*/
 
+    const mostrarProductos = (lista) =>{
+        try{
+            products.innerHTML="";
+            if (lista.length === 0){
+                noResults.style.display = "block";
+            } else {
+                lista.forEach((producto) => {
+                    let card = document.createElement("div")
+                    card.className = "card"
+                    card.id = `${producto.id}`
+                    card.innerHTML = `<img src="${producto.imagen}">
+                                    <h3>${producto.tipo} x ${producto.cantidad}gr</h3>
+                                    <h4>$${producto.precio}</h4>
+                                    <h5>${producto.cantidad}gr.</h5>
+                                    <a class="agregar-carrito" id="boton" >Agregar al carrito</a>`
+                products.appendChild(card)
+            })
+            noResults.style.display = "none";
+            }
+        }catch(error){
+            console.error("el objeto no está en esta página")
+    }}
 
-/* const input = document.getElementById("buscador")
-const busqueda = () => {
-    const searchTerm = input.value.toLowerCase();
-    const filtrados = productos.filter((producto) =>
-        producto.tipo.toLowerCase().startsWith(searchTerm));
-    mostrarProductos(filtrados)
-}
-input.addEventListener("input", busqueda) */
 
+fetch("../db/data.json")
+    .then(response => response.json())
+    .then(data => {mostrarProductos(data)
+            busqueda(data)} 
+    )
 
-//carrito
+    const input = document.getElementById("buscador")
 
+    function busqueda (lista) {
+        const searchTerm = input.value.toLowerCase();
+        const filtrados = lista.filter((producto) =>
+            producto.tipo.toLowerCase().startsWith(searchTerm));
+        mostrarProductos(filtrados)
+    }
+    input.addEventListener("input", busqueda) 
 
+    
+    
 
 //eventListeners
 cargarEventListeners();
@@ -77,7 +80,7 @@ function cargarEventListeners(){
     products.addEventListener("click", agregarAlcarrito);
 
     //eliminar producto
-    datos.addEventListener("click", eliminarProducto)
+    restar.addEventListener("click", eliminarProducto)
 
     carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     carritoHTML()
@@ -90,8 +93,6 @@ function cargarEventListeners(){
 
     
     // boton de cantidad de productos
-
-    //sweet alert
 }
 
 
@@ -107,6 +108,7 @@ function eliminarProducto(e) {
         const productId = e.target.getAttribute('id');
         const existe = carrito.some(product => ( product.id === Number(productId) && product.amount > 1));
         if(existe){
+
             const producto = carrito.map(product => {
                 if(product.id === Number(productId)){
                     product.amount--;
@@ -122,7 +124,15 @@ function eliminarProducto(e) {
     }
     
 }
-
+            /* aumentar.onclick = ()=>{
+                contador++;
+            contar.innerHTML = contador
+        }
+        restar.onclick = () =>{
+            contador--;
+            contar.innerHTML = contador
+        }
+ */
 
 async function leerDatosProducto(product){
     try{
@@ -175,9 +185,9 @@ function carritoHTML(){
         fila.innerHTML = `
         <th><div id="imgProducto"><img src="${img}"></div></th>
         <th><h3 id="tipoProducto">${type}</h3></th>
-        <th><button class="contador" id="aumentar">+</button>
-        <span id="counter">${amount}</span>
-        <button class="contador" id="restar">-</button></th>
+        <th><button class="aumentar" id="${id}">+</button>
+        <span id="${id}" class="counter">${amount}</span>
+        <button class="restar" id="${id}">-</button></th>
         <th><h4 id="precioUnidad">${price}</h4></th>
         <th><h4 id="precioCant">${price*amount}</h4></th>
         <th><button class="borrar"><img id="${id}" class="borrar" src="../img/borrar.png"></button></th>
@@ -189,15 +199,7 @@ function carritoHTML(){
 
 
 
-/* aumentar.onclick = ()=>{
-    contador++;
-    contar.innerHTML = contador
-}
-restar.onclick = () =>{
-    contador--;
-    contar.innerHTML = contador
-}
- */
+
 
 function sincronizarStorage(){
     localStorage.setItem('carrito', JSON.stringify(carrito))
@@ -208,16 +210,3 @@ function limpiarHTML(){
         datos.removeChild(datos.firstChild);
     }
 }
-
-
-// sweet alert
-
-    /* let infoProduct = { 
-    type : product.querySelector('h3').textContent,
-    price : product.querySelector('h4').textContent,
-    cant : product.querySelector('h5').textContent,
-    img: product.querySelector('img').src,
-    id: product.id,
-    amount: 1 
-    }  
- */

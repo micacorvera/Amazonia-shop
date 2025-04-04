@@ -8,10 +8,14 @@ const inputs = document.querySelectorAll("#datos-form input")
 const formTarjeta = document.getElementById("tarjeta-form")
 const inputsCard = document.querySelectorAll("#tarjeta-form input")
 const finalizarCompra = document.getElementById("finalizarCompra")
+const emailInfo = document.getElementById('email-info')
+const envioInfo = document.getElementById('envio-info')
+const infoCobro = document.getElementById('info-cobro')
 const expresiones = {
     correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 	apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
+    telefono: /^\d{6,11}$/,
 	dni: /^\d{6,9}$/, // 6 a 9 numeros.
     tarjeta: /^\d{16,16}$/,
     titular: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
@@ -21,6 +25,7 @@ const campos ={
     mail: false,
     nombre: false,
     apellido: false,
+    telefono:false,
     dni: false,
     tarjeta: false,
     titular: false,
@@ -42,8 +47,8 @@ const validarFormulario = (e) =>{
         case "apellido": 
             validarCampo(expresiones.apellido, e.target, "apellido")
         break;
-        case "dni": 
-            validarCampo(expresiones.dni, e.target, "dni")
+        case "tel": 
+            validarCampo(expresiones.telefono, e.target, "telefono")
         break;
     }
 }
@@ -65,12 +70,30 @@ const validarCampo = (expresion, input, campo) =>{
 try{
     datosForm.addEventListener('submit', (e)=>{
         e.preventDefault()
-        if ((campos.mail && campos.nombre && campos.apellido && campos.dni) === true){
+        if ((campos.mail && campos.nombre && campos.apellido && campos.telefono) === true){
             location.href = "./payment.html";
         }
     })
+    datosForm.addEventListener("submit", e =>{
+        e.preventDefault()
+        const data = Object.fromEntries(
+            new FormData(e.target)
+        )
+        sessionStorage.setItem('datosFacturacion', JSON.stringify(data))
+    })
 }catch (error){
     console.error("el objeto no se encuentra en esta página")
+}finally{
+    infoCliente()
+}
+
+function infoCliente(){
+    const datosFacturacion = JSON.parse(sessionStorage.getItem('datosFacturacion'))
+    console.log(datosFacturacion)
+    emailInfo.innerText=`${datosFacturacion.email}`
+    infoCobro.innerText= `Datos de cobro: \n ${datosFacturacion.nombre} ${datosFacturacion.apellido} 
+    ${datosFacturacion.tel}`
+
 }
 
 
@@ -81,12 +104,13 @@ function mostrarResumen(lista){
         fila.innerHTML = `
         <img src=${producto.img}>
         <h3>${producto.type}</h3>
-        <h3>${producto.price*producto.amount}</h3>
+        <h3>$${producto.price*producto.amount}</h3>
         <h3>x${producto.amount}</h3>`
         compra.appendChild(fila)
     })
 }
 mostrarResumen(carrito)
+console.log(carrito)
 
 const filaSubtotal = document.getElementById("subtotal")
 const filaTotal = document.getElementById("total")
@@ -101,8 +125,8 @@ const subtotal = precios.reduce(function(acumulador, valorActual) {
 console.log(subtotal);
 
 function mostrarSubtotal(){
-    filaSubtotal.innerText = `Subtotal:     ${subtotal}`
-    filaTotal.innerText = `Total:  ${subtotal+precioEnvío}`
+    filaSubtotal.innerText = `Subtotal:     $${subtotal}`
+    filaTotal.innerText = `Total:  $${subtotal+precioEnvío}`
 }
 mostrarSubtotal()
 

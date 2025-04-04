@@ -23,6 +23,7 @@
                     <li><a href="./how_to_buy.html">Cómo comprar</a></li>
                     <li><a href="./contacto.html">Contacto</a></li>
                 </ul>
+                <input type="text" name="buscador" id="buscador" placeholder="Buscar productos">
                 <h3 id="userName"></h3>
                 <div class="botones">
                     <button id="user" class="icon"><img src="../img/usuario.png">
@@ -72,9 +73,9 @@
                         <input type="text" name="apellido" placeholder="Apellido">
                         <h2 class="alertas">El apellido no es valido</h2>      
                     </div>
-                    <div id="grupo-dni">
-                        <input type="text" name="dni" id="dni" placeholder="Dni" maxlength="9">
-                        <h2 class="alertas">El dni no es válido</h2>
+                    <div id="grupo-telefono">
+                        <input type="text" name="tel" id="tel" placeholder="Teléfono" maxlength="11">
+                        <h2 class="alertas">El teléfono no es válido</h2>
                     </div>
                     <h2 id="alertas"></h2>
                 </div>
@@ -87,7 +88,7 @@
             <div id="totales">
                 <table>
                     <tbody>
-                        <tr><td>Subtotal:</td></tr>
+                        <tr><td id="subtotal">Subtotal:</td></tr>
                         <tr class="envio">
                             <td>Costo de envío:</td>
                             <td>costo</td></tr>
