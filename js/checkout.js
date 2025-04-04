@@ -81,12 +81,30 @@ function mostrarResumen(lista){
         fila.innerHTML = `
         <img src=${producto.img}>
         <h3>${producto.type}</h3>
-        <h3>${producto.price}</h3>
+        <h3>${producto.price*producto.amount}</h3>
         <h3>x${producto.amount}</h3>`
         compra.appendChild(fila)
     })
 }
 mostrarResumen(carrito)
+
+const filaSubtotal = document.getElementById("subtotal")
+const filaTotal = document.getElementById("total")
+const precios = []
+const precioEnvío = 0
+carrito.forEach((producto)=>{
+    precios.push(producto.price)
+})
+const subtotal = precios.reduce(function(acumulador, valorActual) {
+    return acumulador + valorActual;
+}, 0);
+console.log(subtotal);
+
+function mostrarSubtotal(){
+    filaSubtotal.innerText = `Subtotal:     ${subtotal}`
+    filaTotal.innerText = `Total:  ${subtotal+precioEnvío}`
+}
+mostrarSubtotal()
 
 /*pagina payment*/
 tarjeta.addEventListener("click", ()=>{
@@ -134,11 +152,6 @@ inputsCard.forEach((input) => {
     })
 
 
-    console.log(carrito)
-    const subtotal = carrito.reduce(function(acumulador, valorActual) {
-        return acumulador + valorActual;
-    }, 0);
-    console.log(subtotal);
 
 
     /* function redireccionar(){
