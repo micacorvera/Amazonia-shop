@@ -41,20 +41,20 @@
             <form id="datos-form">
                 <div id="grupo-mail">
                     <h2>Datos de contacto</h2>
-                    <input class="mail" type="email" name="email" id="mail" placeholder="Correo electrónico">
+                    <input value="user@mail.com" class="mail" type="email" name="email" id="mail" placeholder="Correo electrónico">
                     <h2 class="alertas">El correo no es válido</h2>
                 </div>
                 <div id="grupo-delivery" name="delivery-type">
                     <h2>Entrega</h2>
                     <div class="select">
-                        <input type="radio" name="pickUp-option">
+                        <input id="pick-up" type="radio" name="pickUpOption">
                         <h3>Retiro por el local</h3>
                         <h4>Gratis</h4>
                     </div>
                     <div class="select">
-                        <input type="radio" name="delivery-option">
+                        <input id="delivery" type="radio" name="deliveryOption">
                         <h3>Envío a domicilio</h3>
-                        <h4>Gratis</h4>
+                        <h4>$2000</h4>
                     </div>
                     <h2 class="alertas">Debes seleccionar una opción</h2>
                 </div>
@@ -66,15 +66,15 @@
                         <option value="">Otro</option>
                     </Select>
                     <div id="grupo-nombre">
-                        <input type="text" name="nombre" placeholder="Nombre">
+                        <input value="lirili" type="text" name="nombre" placeholder="Nombre">
                         <h2 class="alertas">El nombre no es valido</h2>  
                     </div>
                     <div id="grupo-apellido">
-                        <input type="text" name="apellido" placeholder="Apellido">
+                        <input value="larila" type="text" name="apellido" placeholder="Apellido">
                         <h2 class="alertas">El apellido no es valido</h2>      
                     </div>
                     <div id="grupo-telefono">
-                        <input type="text" name="tel" id="tel" placeholder="Teléfono" maxlength="11">
+                        <input value="1122334455" type="text" name="tel" id="tel" placeholder="Teléfono" maxlength="11">
                         <h2 class="alertas">El teléfono no es válido</h2>
                     </div>
                     <h2 id="alertas"></h2>
@@ -90,8 +90,8 @@
                     <tbody>
                         <tr><td id="subtotal">Subtotal:</td></tr>
                         <tr class="envio">
-                            <td>Costo de envío:</td>
-                            <td>costo</td></tr>
+                            <td >Costo de envío:</td>
+                            <td id="costo">costo</td></tr>
                         <tr><td id="total">Total:</td></tr>
                     </tbody>
                 </table>

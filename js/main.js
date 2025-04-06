@@ -80,7 +80,7 @@ function cargarEventListeners(){
     products.addEventListener("click", agregarAlcarrito);
 
     //eliminar producto
-    restar.addEventListener("click", eliminarProducto)
+    borrar.addEventListener("click", eliminarProducto)
 
     carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     carritoHTML()
@@ -90,8 +90,6 @@ function cargarEventListeners(){
         limpiarHTML();
         sincronizarStorage()
     })
-
-    
     // boton de cantidad de productos
 }
 
@@ -108,7 +106,6 @@ function eliminarProducto(e) {
         const productId = e.target.getAttribute('id');
         const existe = carrito.some(product => ( product.id === Number(productId) && product.amount > 1));
         if(existe){
-
             const producto = carrito.map(product => {
                 if(product.id === Number(productId)){
                     product.amount--;
@@ -122,7 +119,6 @@ function eliminarProducto(e) {
         console.log(productId)
         carritoHTML();
     }
-    
 }
             /* aumentar.onclick = ()=>{
                 contador++;
@@ -196,10 +192,6 @@ function carritoHTML(){
     //agregar carrito al storage
     sincronizarStorage();
 })};
-
-
-
-
 
 function sincronizarStorage(){
     localStorage.setItem('carrito', JSON.stringify(carrito))

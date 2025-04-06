@@ -58,11 +58,11 @@
                         Tarjeta de crédito o débito
                         <form id="tarjeta-form">
                             <div id="grupo-tarjeta">
-                                <input type="text" name="num-tarjeta" maxlength="16" placeholder="Número de tarjeta">
+                                <input value="1111222233334444" type="text" name="num-tarjeta" maxlength="16" placeholder="Número de tarjeta">
                                 <h2 class="alertas">Número de tarjeta no valido</h2>
                             </div>
                             <div id="grupo-titular">
-                                <input type="text" name="nombre-titular" placeholder="Titular de la tarjeta">
+                                <input value="lirili larila" type="text" name="nombre-titular" placeholder="Titular de la tarjeta">
                                 <h2 class="alertas">El nombre no es valido</h2>
                             </div>
                             <label>Vencimiento de la tarjeta</label>
@@ -72,15 +72,15 @@
                                     <h2 class="alertas">Debe completar este campo</h2>
                                 </div>  
                                 <div id="grupo-cvv">
-                                    <input type="text" name="cod-seguridad" placeholder="CVV" maxlength="3" id="cvv">
+                                    <input value="123" type="text" name="cod-seguridad" placeholder="CVV" maxlength="3" id="cvv">
                                     <h2 class="alertas">Codigo no valido</h2>
                                 </div>
                             </div>
                             <label for="select">Cuotas</label>
                             <select name="cuotas">
-                                <option>1 x precio</option>
-                                <option>3 x precio</option>
-                                <option>6 x precio</option>
+                                <option id="1cuota">1 x precio</option>
+                                <option id="3cuotas">3 x precio</option>
+                                <option id="6cuotas">6 x precio</option>
                             </select>
                             <select name="doc-type">
                                 <option>DNI</option>
@@ -91,12 +91,11 @@
                                 <option>Otro</option>
                             </select>
                             <div id="grupo-dni">
-                                <input name="dni" type="text" maxlength="9" placeholder="Nº de documento">
+                                <input value="12345678" name="dni" type="text" maxlength="9" placeholder="Nº de documento">
                                 <h2 class="alertas">Dni no valido</h2>
                             </div>
                         </form>
                     </li>
-                    <li> <input type="radio" id="mp"> Mercado Pago</li>
                 </ul>
             </div>
             <button id="finalizarCompra">Finalizar compra</button>
@@ -110,7 +109,7 @@
                         <tr><td id="subtotal">Subtotal:</td></tr>
                         <tr class="envio">
                             <td>Costo de envío:</td>
-                            <td>costo</td></tr>
+                            <td id="costo">costo</td></tr>
                         <tr><td id="total">Total:</td></tr>
                     </tbody>
                 </table>
