@@ -35,7 +35,6 @@ const campos ={
     cvv: true,
 }
 
-const mp = document.getElementById("mp")
 carrito = JSON.parse(localStorage.getItem('carrito'))
 
 /*---pag checkout---*/
@@ -206,18 +205,52 @@ try{
         input.addEventListener('keyup', validarTarjeta)
         input.addEventListener('blur', validarTarjeta)
     })
-    
-        finalizarCompra.addEventListener('click', (e)=>{
+    const cuotas = document.getElementsByName("cuotas")[0].value
+    var fecha = new Date();
+    let mes = fecha.getMonth();
+    let dia = fecha.getDate()
+    let año = fecha.getFullYear()
+    console.log(`${dia}/${mes}/${año}`);       
+    console.log(cuotas)
+    finalizarCompra.addEventListener('click', (e)=>{
             e.preventDefault()
             if ((campos.tarjeta && campos.titular && campos.cvv && campos.dni) === true){
-                Swal.fire({
+                /* Swal.fire({
                     title: "Pago realizado",
                     text: "Podrás ver tu factura a continuación",
                     icon: "success",
                     iconColor: 'green',
                     confirmButtonColor:'#500650',
                     showCancelButton: true,
-                })
+                }) */
+                    Swal.fire({
+                        title: "Compra finalizada",
+                        text: "Haz click en 'ver factura' para ver tu factura",
+                        icon: "success",
+                        showCancelButton: true,
+                        iconColor: 'green',
+                        confirmButtonColor:'#500650',
+                        cancelButtonColor: "#d33",
+                        cancelButtonText: "Salir",
+                        confirmButtonText: "ver factura"
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          Swal.fire({
+                            title: `Compra del ${dia}/${mes}/${año}`,
+                            text: "¡Gracias por comprar en açaí amazônia! 😊💜",
+                            html: `Datos de entrega: ${envioInfo.textContent},<br>
+                            Nombre:  ${datosFacturacion.nombre} ${datosFacturacion.apellido}<br>
+                             Email: ${emailInfo.textContent}<br>
+                             Número de teléfono: ${datosFacturacion.tel} <br>
+                             Datos de pago <br>
+                             Medio de pago: Tarjeta <br>
+                             Costo de envío: $${precioEnvio} <br>
+                             Cuotas: ${cuotas} <br>
+                             Total: $${subtotal+precioEnvio}`,
+                             htmlPosition: 'left'
+                          });
+                        }
+                      });
             }
         })
     
@@ -225,17 +258,6 @@ try{
     console.error("el objeto no está en esta página")
 }
 
-
-
-
-
-
-    /* function redireccionar(){
-        
-    }
- */
-    /*  */
-    
 /*     const headName = JSON.parse(localStorage.getItem("usuario"));
     let userName = document.querySelector("#userName")
     userName.innerText=`${headName.name}`; 
