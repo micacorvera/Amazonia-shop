@@ -1,4 +1,3 @@
-
 //variables
 const addToCart = document.getElementById("boton")
 const datos = document.querySelector("#datosProducto tbody")
@@ -44,11 +43,10 @@ let contador = 0;
 
 fetch("../db/data.json")
     .then(response => response.json())
-    .then(data => {mostrarProductos(data)
-            busqueda(data)} 
+    .then(data => mostrarProductos(data) 
     )
 
-    const input = document.getElementById("buscador")
+   /*  const input = document.getElementById("buscador")
 
     function busqueda (lista) {
         const searchTerm = input.value.toLowerCase();
@@ -56,7 +54,7 @@ fetch("../db/data.json")
             producto.tipo.toLowerCase().startsWith(searchTerm));
         mostrarProductos(filtrados)
     }
-    input.addEventListener("input", busqueda) 
+    input.addEventListener("input", busqueda)  */
 
     
     
@@ -80,7 +78,8 @@ function cargarEventListeners(){
     products.addEventListener("click", agregarAlcarrito);
 
     //eliminar producto
-    borrar.addEventListener("click", eliminarProducto)
+    datos.addEventListener("click", eliminarProducto)
+    datos.addEventListener("click", aumentarProducto)
 
     carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     carritoHTML()
@@ -100,9 +99,8 @@ function agregarAlcarrito(e){
         leerDatosProducto(productoSeleccionado)
     }
 }
-
 function eliminarProducto(e) {
-    if (e.target.classList.contains("borrar")){
+    if (e.target.classList.contains("restar")){
         const productId = e.target.getAttribute('id');
         const existe = carrito.some(product => ( product.id === Number(productId) && product.amount > 1));
         if(existe){
@@ -114,21 +112,32 @@ function eliminarProducto(e) {
             });
             carrito = [...producto]
         }else{
-            carrito = carrito.filter(producto => producto.id !== Number(productId));
+            carrito = carrito.filter(producto =>producto.id !== Number(productId));
         }     
         console.log(productId)
         carritoHTML();
     }
 }
-            /* aumentar.onclick = ()=>{
-                contador++;
-            contar.innerHTML = contador
+function aumentarProducto(e){
+    if (e.target.classList.contains("aumentar")){
+        const productId = e.target.getAttribute('id');
+        console.log(productId)
+        const existe = carrito.some(product => product.id === Number(productId));
+        if(existe){
+            const producto = carrito.map(product => {
+                if(product.id=== Number(productId) ){
+                    product.amount++;
+                    return product
+                }else{
+                    return product
+                }
+            });
+            carrito = [...producto]
         }
-        restar.onclick = () =>{
-            contador--;
-            contar.innerHTML = contador
+        carritoHTML();
         }
- */
+}
+
 
 async function leerDatosProducto(product){
     try{
@@ -186,7 +195,6 @@ function carritoHTML(){
         <button class="restar" id="${id}">-</button></th>
         <th><h4 id="precioUnidad">${price}</h4></th>
         <th><h4 id="precioCant">${price*amount}</h4></th>
-        <th><button class="borrar"><img id="${id}" class="borrar" src="../img/borrar.png"></button></th>
         `;
         datos.appendChild(fila);
     //agregar carrito al storage
@@ -202,3 +210,14 @@ function limpiarHTML(){
         datos.removeChild(datos.firstChild);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
